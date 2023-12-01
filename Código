@@ -1,0 +1,40 @@
+#include <Thermistor.h>
+#include <LiquidCrystal.h>
+
+Thermistor temp(0); // Porta analogica 0 ; temp (nome qualquer)
+LiquidCrystal lcd(12,11,5,4,3,2);
+
+void setup()
+{
+  lcd.begin (16,2); //Define o numero de colunas e  linhas do LCD
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int temperatura = temp.getTemp(); // "Basicamente pega a temperatura , converte a tensão para Graus C°"
+
+  
+ // Posicionando o cursor e mostrando o texto
+ 
+ lcd.clear (); // Limpa a tela do lcd
+
+ lcd.setCursor (2,0); // Posiciona o cursor na 5 coluna e linha 1
+
+ lcd.print ("Temperatura:"); //Envia o texto entre as aspas para o LCD
+
+ lcd.setCursor (6,1); // posiciona o cursor na 5 coluna e linha 2
+ 
+ lcd.print (temperatura);
+
+  lcd.setCursor (8,1); // posiciona o cursor na 5 coluna e linha 2
+ 
+ lcd.print ("C");
+
+Serial.print("Temperatura: ");
+Serial.println(temperatura);
+
+  
+ delay (500); //Espera 3 segundos
+ 
+}
